@@ -8,8 +8,8 @@ if (strlen($_SESSION['uid']==0)) {
 //Change Password
 if(isset($_POST['change']))
 {
-$cpwd=md5($_POST['currentpwd']);
-$npwd=md5($_POST['newpwd']);  
+$cpwd=password_hash($_POST['currentpwd'],PASSWORD_ARGON2I);
+$npwd=password_hash($_POST['newpwd'],PASSWORD_ARGON2I);
 $uid=$_SESSION['uid'];
 $updatetTime = date( 'd-m-Y h:i:s A', time () );
 
@@ -22,8 +22,8 @@ echo "<script>alert('Current password is wrong');</script>";
     }else{
          $ret->close();
          $con->next_result();
-$query=mysqli_query($con,"call sp_userchangepwd('$npwd','$updatetTime','$uid')"); 
-echo "<script>alert('Your password chnaged successfully');</script>";  
+$query=mysqli_query($con,"call sp_userchangepwd('$npwd','$updatetTime','$uid')");
+echo "<script>alert('Your password chnaged successfully');</script>";
 echo "<script>window.location.href='change-password.php'</script>";
 }
 }
@@ -59,7 +59,7 @@ document.changepwd.confirmpwd.focus();
 return false;
 }
 return true;
-}   
+}
 
 </script>
 </head>
@@ -107,9 +107,9 @@ return true;
                                 <div class="card-body">
 <form method="post" name="changepwd" onsubmit="return checkpass();">
              <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                                 
-                 
-                                        
+
+
+
                                     <tr>
                                             <th>Current Password</th>
                                             <td>
@@ -125,11 +125,11 @@ return true;
                                         <tr>
                                             <th>Confirm Password</th>
                                             <td>
-                                                
+
                                                      <input type="password" class="form-control form-control-user" id="confirmpwd"  name="confirmpwd" required="true">
                                             </td>
                                         </tr>
-                                     
+
                                 </table>
                                     <button type="submit" name="change" class="btn btn-primary btn-user btn-block">
                                             Change

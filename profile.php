@@ -5,7 +5,7 @@ include('includes/config.php');
 if (strlen($_SESSION['uid']==0)) {
   header('location:logout.php');
   } else{
-   
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,7 +64,7 @@ if (strlen($_SESSION['uid']==0)) {
 
                         <div class="col-lg-12">
 
-<?php 
+<?php
 $uid=$_SESSION['uid'];
 $query=mysqli_query($con,"call sp_userprofile($uid)");
 while ($result=mysqli_fetch_array($query)) {
@@ -81,9 +81,9 @@ while ($result=mysqli_fetch_array($query)) {
 <a href="edit-profile.php">Edit Profile</a>
 
              <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                                 
-                 
-                                        
+
+
+
                                     <tr>
                                             <th>First Name</th>
                                             <td><?php echo $result['FirstName'];?></td>
@@ -95,6 +95,10 @@ while ($result=mysqli_fetch_array($query)) {
                                         <tr>
                                             <th>Email Id</th>
                                             <td><?php echo $result['EmailId'];?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>mobile</th>
+                                            <td><?php echo $result['mobile'];?></td>
                                         </tr>
                                         <tr>
                                             <th>Last Updation Date </th>

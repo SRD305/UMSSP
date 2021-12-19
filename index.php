@@ -23,7 +23,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">UMS-SP</a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Secured Programming for Web Applicaiton</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -50,8 +50,8 @@
 
   <header class="bg-primary text-white">
     <div class="container text-center">
-      <h1>TEST</h1>
-      <p class="lead">TESTING PARAGRAPH</p>
+      <h1>SPW</h1>
+      <p class="lead">Secured Programming for Web Applicaiton</p>
     </div>
   </header>
 
@@ -79,7 +79,6 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; PHPGurukul 2021</p>
     </div>
     <!-- /.container -->
   </footer>

@@ -1,12 +1,14 @@
 <?php
 //db Connection file
 include('includes/config.php');
+include('includes/inputval.php');
 //code for signup
 if(isset($_POST['signup']))
 {
-$fname=$_POST['fname'];
-$lname=$_POST['lname'];
-$email=$_POST['emailid'];
+$fname=Input::str($_POST['fname']);
+$lname=Input::str($_POST['lname']);
+$email=Input::email($_POST['emailid']);
+//$mobile=Input::int($_POST['mobile']);
 $password=$_POST['inputpass'];
 $isactive=1;
 //checking email if already exists
@@ -109,6 +111,9 @@ return true;
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="emailid" placeholder="Email Address" name="emailid" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <input type="mobile" class="form-control form-control-user" id="mobile" placeholder="Mobile" name="Mobile" required="true">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">

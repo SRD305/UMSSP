@@ -1,16 +1,24 @@
 <?php
 session_start();
 include('../includes/config.php');
+include('../includes/inputval.php');
 if(isset($_POST['login']))
 {
   $unmae=$_POST['username'];
-  $password=md5($_POST['loginpassword']);
+  $password=password_hash($_POST['loginpassword'],PASSWORD_ARGON2I);
   $query=mysqli_query($con,"call sp_adminlogin('$unmae','$password')");
 $num=mysqli_fetch_array($query);
 if($num>0)
 {
 $_SESSION['adid']=$num['id'];
 $_SESSION['fllname']=$num['FullName'];
+$_SESSION['last_login_timestmp']= time();
+             $str=rand();
+             $result = md5($str);
+             $cookie_name=$result;
+             $cookie_value=$num['id'];
+             setcookie($cookie_name, $cookie_value);
+             setcookie($cookie_name, $cookie_value, time() + 3600,"/");
 header("location:dashboard.php");
 }
 else
@@ -71,7 +79,7 @@ echo "<script>alert('Invalid  login details');</script>";
                                             <input type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Password" name="loginpassword" required="true">
                                         </div>
-                                 
+
                                         <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
@@ -80,7 +88,7 @@ echo "<script>alert('Invalid  login details');</script>";
                                     <div class="text-center">
                                         <a class="small" href="password-recovery.php">Forgot Password?</a>
                                     </div>
-                              
+
                                 </div>
                             </div>
                         </div>

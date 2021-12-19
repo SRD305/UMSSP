@@ -4,9 +4,14 @@ include('includes/config.php');
 include('includes/inputval.php');
 if(isset($_POST['login']))
 {
-
+  if ($_POST["verficationcode"] != $_SESSION["vercode"] OR $_SESSION["vercode"]=='')
+    {
+    echo "<script>alert('Incorrect captcha');</script>" ;
+    }
+    else
+		{
   $email=Input::email($_POST['emailid']);
-  $password=$_POST['loginpassword'];
+  $password=Input::str($_POST['loginpassword']);
   if (!empty($_POST['$email']) && !empty($_POST['$password']))
     {
 	             $password = trim(htmlspecialchars($_POST['password']));
@@ -21,15 +26,25 @@ if($verify)
 $_SESSION['uid']=$num['id'];
 $_SESSION['last_login_timestmp']= time();
 $_SESSION['fname']=$num['FirstName'];
-//$cookie_name['aid']=$ret;
-//$cookie_value = $ret;
-//setcookie($cookie_name, $cookie_value,);
-//setcookie($cookie_name, $cookie_value, time() + 3600, "/");
+$str=rand();
+            $result = md5($str);
+            $cookie_name=$result;
+            $cookie_value= $num["id"];
+            setcookie($cookie_name, $cookie_value);
+            setcookie($cookie_name, $cookie_value, time() + 3600,"/");
+  //          $ip=$_SERVER['REMOTE_ADDR'];
+//$geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip;
+//$addrDetailsArr = unserialize(file_get_contents($geopluginURL));
+//$city = $addrDetailsArr['geoplugin_city'];
+//$country = $addrDetailsArr['geoplugin_countryName'];
+//$log="insert into userLog(userId,userEmail,userIp,city,country) values('$num','$email','$ip','$city','$country')";
+//$mysqli->query($log);
 header("location:welcome.php");
 }
 else
 {
 echo "<script>alert('Invalid  login details');</script>";
+}
 }
 }
 ?>
